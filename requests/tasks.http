@@ -1,0 +1,38 @@
+### PETICION GET PARA OBTENER TODAS LAS TAREAS CON 3 TAREAS EN CADA PAGINA (SI NO PONEMOS NADA SON 3 TAREAS)
+GET http://localhost:3000/api/tasks  
+
+### PETICION GET PARA OBTENER TODAS LAS TAREAS CON 5 TAREAS EN CADA PAGINA (SI PONEMOS ?size=5 SON 5 TAREAS)
+GET http://localhost:3000/api/tasks?size=5
+
+### PETICION GET PARA OBTENER TODAS LAS TAREAS CON 5 TAREAS EN LA TERCERA PAGINA (SI PONEMOS ?size=5&page=2 SON 5 TAREAS EN LA TERCERA PAGINA)
+GET http://localhost:3000/api/tasks?size=5&page=2
+
+### PETICION GET PARA OBTENER TODAS LAS TAREAS CON 5 TAREAS EN LA PRIMERA PAGINA (SI PONEMOS ?size=5&page=2 SON 5 TAREAS EN LA PRIMERA PAGINA) Y SEGUN SU TITULO
+GET http://localhost:3000/api/tasks?size=5&page=0&title=react
+
+### PETICION POST PARA CREAR UNA TAREA
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{
+    "title": "Hacer un sitio web en HTML y CSS",
+    "description": "trabajo freelance",
+    "done": true
+}
+
+### PETICION GET PARA OBTENER SOLO UNA TAREA POR SU ID
+GET http://localhost:3000/api/tasks/5fcdf53abd70146100ebdba6
+
+### PETICION DELETE PARA ELIMINAR SOLO UNA TAREA POR SU ID
+DELETE http://localhost:3000/api/tasks/5fcdeec56e04053970607cf5
+
+### PETICION GET PARA OBTENER TODAS LAS TAREAS CON DONE TRUE
+GET http://localhost:3000/api/tasks/done
+
+### PETICION PUT PARA ACTUALIZAR EL TITULO DE UNA TAREA POR SU ID
+PUT http://localhost:3000/api/tasks/5fcdf529bd70146100ebdba5
+Content-Type: application/json
+
+{
+    "title": "Hacer un sitio web en HTML"
+}

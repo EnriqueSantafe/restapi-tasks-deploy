@@ -1,0 +1,8 @@
+# environment variables
+.env
+
+# node
+node_modules
+dist
+
+pasos.txt

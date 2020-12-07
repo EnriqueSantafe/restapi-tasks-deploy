@@ -1,0 +1,62 @@
+https://www.youtube.com/watch?v=HEx2lVokPu0
+
+Necesito nodejs, mongodb y express.
+Primero creo un proyecto de node escribiendo en la terminal 'npm init -y' y crea un 'package.json'.
+Para separar los archivos de configuracion del código creo una carpeta 'src' y dentro voy a crear todo el código.
+Ahora necesito crear un servidor con el módulo 'express' escribiendo en la terminal 'npm i express' y crea una carpeta 'node_modules' y un archivo 'package-lock.json'.
+Para utilizar 'express' creo en la carpeta 'src' un archivo llamado 'index.js' y requiero 'express' que me devuelve un objeto 'app' que es el servidor.
+Para ejecutar el servidor escribo en la terminal 'node src/index.js' y la terminal cambia de '1:cmd' a '1:node' y escribo en el navegador 'localhost:3000'.
+Para usar 'import' en lugar de 'require' voy a usar babel que es un módulo de javascript que me permite convertir código moderno a código que es soportado por node y por los navegadores. Para usar babel escribo en la terminal 'npm i @babel/core @babel/cli @babel/node @babel/preset-env -D'. Para usar babel creo un archivo llamado '.babelrc'.
+Para ejecutar el servidor escribo en la terminal 'npx babel-node src/index.js' y escribo en el navegador 'localhost:3000'.
+Ahora creo un script en el 'package.json': "start": "babel-node src/index.js" y escribo en la terminal 'npm start'.
+Para actualizar los cambios y reiniciar el servidor uso el módulo 'nodemon' y para instalarlo escribo en la terminal 'npm i nodemon -D' y cambio en 'package.json' el script a "nodemon src/index.js --exec babel-node". Ahora escribo en la terminal 'npm start'.
+
+Para crear una API en express hay que configurar express con 'app.set...' y 'app.get...' pero lo voy a hacer en una carpeta llamada 'routes' y dentro un archivo llamado 'index.js'.
+
+Puedo separar código de inicialización del servidor y código de configuración del servidor en archivos por separado y para ello creo en la carpeta 'routes' el archivo 'app.js' donde voy a guardar el código de configuración del servidor y en el archivo 'index.js' guardo el código de inicialización del servidor.
+
+Ahora abro otro terminal y ejecuto 'mongodb' y para ello escribo en la terminal: 'mongo'. Si no funciona hay que escribir primero el comando 'mongod' y abro otro terminal y escribo: 'mongo'.
+Para que este proyecto se conecte a 'mongodb' necesito instalar un módulo llamado 'mongoose', entonces cancelo la terminal de node y escribo: 'npm i mongoose'.
+Ahora creo dentro de la carpeta 'src' un archivo llamado 'database.js' que solo tenga la configuración de la base de datos.
+Ahora escribo en la terminal de node 'npm start'.
+
+Voy a crear una variable de entorno y para ello creo un archivo llamado '.env' y voy a instalar el módulo dotenv escribiendo en la terminal: 'npm i dotenv'. Creo un archivo llamado '.gitignore' para no subir a github el archivo '.env'.
+Para leer las variables de entorno de '.env' tengo que importar el módulo 'dotenv' en un archivo llamado 'config.js'.
+Ahora escribo en la terminal de node 'npm start'.
+
+Ahora para utilizar la conexión de mongodb creo dentro de la carpeta 'src' la carpeta llamada 'models' que va a tener dentro una descripción de los datos que voy a estar guardando dentro de la base de datos y dentro creo el archivo 'Task.js'.
+
+En lugar de Postman o Insomnia voy a trabajar con una extensión de VSC llamada 'REST Client'. 
+Creo una carpeta llamada 'request' y dentro un archivo con la extensión '.http' llamado 'tasks.http'.
+Ahora escribo en la terminal de node 'npm start'.
+En el archivo 'tasks.http' escribo una petición GET http://localhost:3000/api/tasks  y pulso 'Send Request' y otra POST http://localhost:3000/api/tasks y pulso 'Send Request'.
+Si quiero enviar un dato a través de la petición POST tengo que crear un objeto desde el cliente.
+Para que lo lea, en express tengo que añadir un módulo llamado json para entender objetos json.
+En la ruta post tengo que crear un objeto y para guardarlo en la base de datos escribo debajo 'newTask.save()' y como es asíncrono le pongo await y a la función le pongo async.
+Ahora en la terminal de mongo escribo: 'show dbs' y veo la base de datos 'tasksdb'. Escribo 'use tasksdb' y entra en la base de datos 'tasksdb'. Escribo 'show collections' y veo una colección llamada 'tasks'. Escribo 'db.tasks.find()' y me muestra el objeto que hemos guardado. Escribo 'db.tasks.find().pretty()' se ve mejor.
+
+PARA REGRESAR TRAS UNA PARADA HAY QUE ESCRIBIR EN LA TERMINAL: 'npm start', HAY QUE ABRIR EL NAVEGADOR CON 'localhost:3000' Y ABRIR UNA TERMINAL NUEVA CON 'mongo'.
+
+Creo una carpeta llamada 'controllers' y dentro guardo las funciones que se ejecutan.
+
+REVISION DE ARCHIVOS Y CODIGO: 
+- en el archivo index.js estoy llamando la app y la base de datos y estoy definiendo el puerto
+- el archivo app.js tiene la aplicación de express y coloco las rutas y veo las peticiones que me están llegando y para ello instalo un módulo llamado 'morgan' escribiendo en la terminal 'npm i morgan' para ir viendo las peticiones que me van llegando por consola. Escribo otra vez en la terminal 'npm start'. También instalo el módulo 'cors' para realizar peticiones cruzadas 
+- el archivo database.js tenemos la conexión y las configuraciones básicas.
+- en el archivo config.js estoy llamando el módulo dotenv
+- en el archivo tasks.routes.js tenemos la definición de las rutas
+- en el archivo Task.js tenemos el Schema con un título, una descripción y un donde
+- en el archivo task.controller.js 
+Para crear una paginación instalo un módulo llamado 'mongoose-paginate-v2' escribiendo en la terminal 'npm i mongoose-paginate-v2'
+
+Ahora voy a compilar la aplicación.
+Creo en 'package.json' el script '"build": "babel src --out-dir dist"' y escribo en la terminal 'npm run build' y va a generar todo el código de la carpeta de distribución 'dist' y cambio el comando "start" (comando de despliegue) por el comando "dev" (comando de desarrollo) y creo el comando '"start": "node dist/index.js"'. 
+Entonces en desarrollo ejecutaría 'npm run dev'. 
+Para construir la aplicación ejecutaría 'npm run build'.
+Para ejecutar la aplicación en producción ejecutaría 'npm start'. Para que en producción funcione necesito instalar un plugin de babel escribiendo en la terminal 'npm i -D @babel/plugin-transform-runtime'. Ahora escribo 'npm run build' y 'npm start'.
+
+Ahora lo voy a subir a un servidor (clouding.io). Primero voy a subir el código a github y luego lo voy a clonar en clouding.io.
+Lo primero voy a crear un repositorio de git escribiendo en una nueva terminal 'git init'. 
+Luego escribo 'git status'.
+Luego escribo 'git add .'.
+Luego escribo 'git status'.
